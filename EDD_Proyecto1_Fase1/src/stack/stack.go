@@ -1,7 +1,9 @@
 package stack
 
+import "fmt"
+
 type item struct {
-	value interface{} // hold any data type
+	value string // hold any data type
 	next  *item
 }
 type Stack struct {
@@ -9,7 +11,7 @@ type Stack struct {
 	size int
 }
 
-func (stack *Stack) Push(v interface{}) {
+func (stack *Stack) Push(v string) {
 	stack.top = &item{
 		value: v,
 		next:  stack.top,
@@ -22,9 +24,9 @@ func (stack *Stack) Len() int {
 func (stack *Stack) isEmpty() bool {
 	return stack.Len() == 0
 }
-func (stack *Stack) Pop() interface{} {
+func (stack *Stack) Pop() string {
 	if stack.isEmpty() {
-		return nil
+		return ""
 	}
 
 	valueToPop := stack.top.value
@@ -32,9 +34,18 @@ func (stack *Stack) Pop() interface{} {
 	stack.size--
 	return valueToPop
 }
-func (stack *Stack) Peek() interface{} {
+func (stack *Stack) Peek() string {
 	if stack.isEmpty() {
-		return nil
+		return ""
 	}
 	return stack.top.value
+}
+
+func (stack *Stack) ReadStack() {
+	temp := stack.top
+	for temp != nil {
+		fmt.Println(temp.value)
+		temp = temp.next
+	}
+	fmt.Println(" ")
 }

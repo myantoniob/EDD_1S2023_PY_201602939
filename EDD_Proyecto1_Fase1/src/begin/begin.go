@@ -7,8 +7,10 @@ import (
 	"fmt"
 	"os"
 	"queue"
+	"stack"
 	"strconv"
 	"strings"
+	"time"
 )
 
 type Customer struct {
@@ -18,13 +20,11 @@ type Customer struct {
 
 var cola queue.Queue
 var listaDoble doubly.DoublyList
+var pila stack.Stack
 
 func main() {
 
 	/*cola := queue.Queue{}
-	cola.Enqueue("mynor", "ramirez", 2016, "pass")
-	fmt.Println(cola.Dequeue())
-	listaDoble.InsertFront("juan", "perez", 2016, "sdssd")
 	listaDoble.TraverseForward()*/
 
 	// Choos log in / or Report or exit
@@ -39,6 +39,7 @@ func main() {
 
 		} else if selected == 2 {
 			fmt.Println("Reportes")
+			readAdminStack()
 		} else {
 			fmt.Println("Have a nice day :) ")
 			exit = false
@@ -181,18 +182,30 @@ func pendingStudents() {
 			switch option {
 			case "1":
 				listaDoble.InsertFront(actual.Name, actual.LastName, actual.Carnet, actual.Password)
-				cola.Dequeue()
+
+				aux := cola.Dequeue()
+				ct := time.Now()
+				ms := fmt.Sprintf("Student accepted: %s %s %v/%v/%v  %v:%v", aux.Name, aux.LastName, ct.Day(), ct.Month(), ct.Year(), ct.Hour(), ct.Minute())
+				//ms := fmt.Sprintf("Student accepted: ", aux.Name, " ", ct.Day(), "/", ct.Month(), "/", ct.Year(), " ", ct.Hour(), ":", ct.Minute())
+				pila.Push(ms)
+
 				for i := 0; i < 6; i++ {
 					fmt.Println(" ")
 				}
 				fmt.Println("Student accepted :) ")
 				//listaDoble.TraverseForward()
 			case "2":
-				cola.Dequeue()
+				aux := cola.Dequeue()
+				ct := time.Now()
+				ms := fmt.Sprintf("Student rejected: %s %s %v/%v/%v  %v:%v", aux.Name, aux.LastName, ct.Day(), ct.Month(), ct.Year(), ct.Hour(), ct.Minute())
+				//ms := fmt.Sprintf("Student rejected: ", aux.Name, " ", ct.Day(), "/", ct.Month(), "/", ct.Year(), " ", ct.Hour(), ":", ct.Minute())
+				pila.Push(ms)
+
 				for i := 0; i < 6; i++ {
 					fmt.Println(" ")
 				}
 				fmt.Println("Student rejected :( ")
+
 			case "3":
 				fmt.Println(" ")
 				exit = false
@@ -236,6 +249,10 @@ func newStudents() bool {
 
 	//To add a node to the queue
 	cola.Enqueue(name, lastName, carnet1, password)
+	ct := time.Now()
+	ms := fmt.Sprintf("New student created: %s %s %v/%v/%v  %v:%v", name, lastName, ct.Day(), ct.Month(), ct.Year(), ct.Hour(), ct.Minute())
+	pila.Push(ms)
+
 	for i := 0; i < 6; i++ {
 		fmt.Println(" ")
 	}
@@ -271,6 +288,12 @@ func studentsBulkLoad() {
 		// Go to the pending queue
 		cola.Enqueue(preload.name, preload.lastname, preload.carnet, preload.password)
 	}
+	ct := time.Now()
+
+	ms := fmt.Sprintf("Students BulkLoad was done %v/%v/%v  %v:%v", ct.Day(), ct.Month(), ct.Year(), ct.Hour(), ct.Minute())
+	//ms := fmt.Sprintf("Students were added ", ct.Day(), "/", ct.Month(), "/", ct.Year(), " ", ct.Hour(), ":", ct.Minute())
+	pila.Push(ms)
+
 	fmt.Println("<- New students were added to the queue ->")
 }
 
@@ -288,4 +311,8 @@ func readCsvFile(filePath string) [][]string {
 	}
 
 	return records
+}
+
+func readAdminStack() {
+	pila.ReadStack()
 }
