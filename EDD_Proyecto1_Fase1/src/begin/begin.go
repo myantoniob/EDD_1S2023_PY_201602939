@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"doubly"
+	"encoding/csv"
 	"fmt"
 	"os"
 	"queue"
@@ -27,18 +28,23 @@ func main() {
 	listaDoble.TraverseForward()*/
 
 	// Choos log in / or Report or exit
-	selected := menu()
-	if selected == 1 {
-		client := login()
-		if client.username == "admin" && client.password == "admin" {
-			adminDashboard()
+	exit := true
+	for exit {
+		selected := menu()
+		if selected == 1 {
+			client := login()
+			if client.username == "admin" && client.password == "admin" {
+				adminDashboard()
+			}
+
+		} else if selected == 2 {
+			fmt.Println("Reportes")
+		} else {
+			fmt.Println("Have a nice day :) ")
+			exit = false
 		}
-
-	} else if selected == 2 {
-		fmt.Println("Reportes")
-	} else {
-
 	}
+
 }
 
 func menu() int {
@@ -57,10 +63,19 @@ func menu() int {
 		option = strings.TrimSpace(option)
 		switch option {
 		case "1":
+			for i := 0; i < 6; i++ {
+				fmt.Println("")
+			}
 			return 1
 		case "2":
+			for i := 0; i < 6; i++ {
+				fmt.Println("")
+			}
 			return 2
 		case "3":
+			for i := 0; i < 6; i++ {
+				fmt.Println("")
+			}
 			return 3
 		default:
 			for i := 0; i < 6; i++ {
@@ -70,6 +85,7 @@ func menu() int {
 		}
 
 	}
+
 	return -1
 }
 
@@ -110,21 +126,35 @@ func adminDashboard() {
 
 		switch option {
 		case "1":
+			for i := 0; i < 6; i++ {
+				fmt.Println(" ")
+			}
 			pendingStudents()
-			break
+
 		case "2":
+			for i := 0; i < 6; i++ {
+				fmt.Println(" ")
+			}
 			acceptedStudents()
-			break
+
 		case "3":
+			for i := 0; i < 6; i++ {
+				fmt.Println(" ")
+			}
 			newStudents()
 
 		case "4":
+			for i := 0; i < 6; i++ {
+				fmt.Println(" ")
+			}
 			studentsBulkLoad()
-			break
+
 		case "5":
-			fmt.Println(" ")
+			for i := 0; i < 6; i++ {
+				fmt.Println(" ")
+			}
 			exit = false
-			break
+
 		default:
 			fmt.Println("Enter a valid option :( ")
 		}
@@ -134,33 +164,53 @@ func adminDashboard() {
 
 func pendingStudents() {
 	fmt.Println("**** Pending Students ****")
+	exit := true
+	for exit {
+		fmt.Println("**** Pending #: ", cola.Len(), "****")
+		actual := cola.Front()
+		if actual.Carnet != 0 {
+			fmt.Println("Current student: ", actual.Name, " ", actual.LastName)
+			fmt.Println("1. Accept student")
+			fmt.Println("2. Reject student")
+			fmt.Println("3. Return to menu")
+			fmt.Print("Enter a #: ")
+			reader := bufio.NewReader(os.Stdin)
+			option, _ := reader.ReadString('\n')
+			option = strings.TrimSpace(option)
 
-	fmt.Println("**** Pending #: ", cola.Len(), "****")
-	actual := cola.Dequeue()
-	fmt.Println("Current student: ", actual.Name, " ", actual.LastName)
-	fmt.Println("1. Accept student")
-	fmt.Println("2. Reject student")
-	fmt.Println("3. Return to menu")
-	fmt.Print("Enter a #: ")
-	reader := bufio.NewReader(os.Stdin)
-	option, _ := reader.ReadString('\n')
-	option = strings.TrimSpace(option)
+			switch option {
+			case "1":
+				listaDoble.InsertFront(actual.Name, actual.LastName, actual.Carnet, actual.Password)
+				cola.Dequeue()
+				for i := 0; i < 6; i++ {
+					fmt.Println(" ")
+				}
+				fmt.Println("Student accepted :) ")
+				//listaDoble.TraverseForward()
+			case "2":
+				cola.Dequeue()
+				for i := 0; i < 6; i++ {
+					fmt.Println(" ")
+				}
+				fmt.Println("Student rejected :( ")
+			case "3":
+				fmt.Println(" ")
+				exit = false
+			default:
+				fmt.Println("Choose a valid option :(")
+			}
+		}
 
-	switch option {
-	case "1":
-		listaDoble.InsertFront(actual.Name, actual.LastName, actual.Carnet, actual.Password)
-		fmt.Println("Student accepted :) ")
-		listaDoble.TraverseForward()
-	case "2":
-		fmt.Println("Student rejected :( ")
-	case "3":
-		fmt.Println(" ")
-	default:
-		fmt.Println("Choose a valid option :(")
 	}
+
 }
 
-func acceptedStudents() {}
+func acceptedStudents() {
+
+	fmt.Println("***** Students List *****")
+	fmt.Println("Size: ", listaDoble.Size())
+	listaDoble.TraverseForward()
+}
 
 func newStudents() bool {
 	reader := bufio.NewReader(os.Stdin)
@@ -186,6 +236,56 @@ func newStudents() bool {
 
 	//To add a node to the queue
 	cola.Enqueue(name, lastName, carnet1, password)
+	for i := 0; i < 6; i++ {
+		fmt.Println(" ")
+	}
 	return true
 }
-func studentsBulkLoad() {}
+
+type Preload struct {
+	name     string
+	lastname string
+	carnet   int
+	password string
+}
+
+func studentsBulkLoad() {
+	archivo := readCsvFile("prueba.csv")
+	for i := 1; i < len(archivo); i++ {
+		var preload Preload
+		for j := 0; j < len(archivo[i]); j++ {
+			if j == 0 {
+				preload.carnet, _ = strconv.Atoi(archivo[i][j])
+			}
+			var res []string
+			if j == 1 {
+				res = strings.Split(archivo[i][j], " ")
+				preload.name = res[0]
+				preload.lastname = res[1]
+			}
+
+			if j == 2 {
+				preload.password = archivo[i][j]
+			}
+		}
+		// Go to the pending queue
+		cola.Enqueue(preload.name, preload.lastname, preload.carnet, preload.password)
+	}
+	fmt.Println("<- New students were added to the queue ->")
+}
+
+func readCsvFile(filePath string) [][]string {
+	f, err := os.Open(filePath)
+	if err != nil {
+		fmt.Println("Unable to read input file "+filePath, err)
+	}
+	defer f.Close()
+
+	csvReader := csv.NewReader(f)
+	records, err := csvReader.ReadAll()
+	if err != nil {
+		fmt.Println("Unable to parse file as CSV for "+filePath, err)
+	}
+
+	return records
+}

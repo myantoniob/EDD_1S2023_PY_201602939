@@ -1,7 +1,5 @@
 package queue
 
-import "fmt"
-
 type Item struct {
 	Name     string
 	LastName string
@@ -28,7 +26,7 @@ func NewNode(name string, lastName string, carnet int, password string, next *No
 }
 
 func (queue *Queue) Enqueue(name string, lastName string, carnet int, password string) {
-	fmt.Println(name, lastName, carnet, password)
+	//fmt.Println(name, lastName, carnet, password)
 	newItem := NewNode(name, lastName, carnet, password, queue.front)
 	if queue.isEmpty() {
 		queue.front = newItem

@@ -69,7 +69,8 @@ func (d *DoublyList) TraverseForward() error {
 	}
 	temp := d.head
 	for temp != nil {
-		fmt.Printf("value = %v, prev = %v, next = %v\n", temp.carnet, temp.prev, temp.next)
+		//fmt.Printf("value = %v, prev = %v, next = %v\n", temp.carnet, temp.prev, temp.next)
+		fmt.Println("Name:", temp.name, " ", temp.lastName, ", Carnet: ", temp.carnet)
 		temp = temp.next
 	}
 	fmt.Println()
