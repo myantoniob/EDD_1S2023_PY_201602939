@@ -1,6 +1,7 @@
 package doubly
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -9,6 +10,17 @@ import (
 	"strconv"
 	"time"
 )
+
+type Item struct {
+	Name     string `json:"nombre"`
+	Carnet   int    `json:"carnet"`
+	Password string `json:"password"`
+	Carpeta  string `json:"Carpeta_Raiz"`
+}
+
+type Alumno struct {
+	Alumnos []Item `json:"alumnos"`
+}
 
 type node struct {
 	//data string
@@ -124,6 +136,26 @@ func (d *DoublyList) Size() int {
 }
 
 // ---------------------------------
+func (d *DoublyList) JsonFile() {
+	people := Alumno{
+		Alumnos: []Item{},
+	}
+	// ******************
+	temp := d.head
+	for temp != nil {
+		xname := fmt.Sprintf("%s %s", temp.Name, temp.LastName)
+		people.Alumnos = append(people.Alumnos, Item{xname, temp.Carnet, temp.Password, "/"})
+		fmt.Println("Name:", temp.Name, " ", temp.LastName, ", Carnet: ", temp.Carnet)
+		temp = temp.next
+	}
+	fmt.Println()
+
+	// ******************
+	//people.Alumnos = append(people.Alumnos, Item{"mynor", 2016, "pe", "/"})
+
+	file, _ := json.MarshalIndent(people, "", " ")
+	_ = ioutil.WriteFile("test2.json", file, 0644)
+}
 
 func (r *DoublyList) Graficar() {
 	fmt.Println("Impresion")

@@ -1,0 +1,34 @@
+{
+ "alumnos": [
+  {
+   "nombre": "Julian Lewis",
+   "carnet": 201268474,
+   "password": "Z1dxNvL$90Qe",
+   "Carpeta_Raiz": "/"
+  },
+  {
+   "nombre": "Samantha Nguyen",
+   "carnet": 201502132,
+   "password": "FzFVpfi#1GRl",
+   "Carpeta_Raiz": "/"
+  },
+  {
+   "nombre": "Landon Dominguez",
+   "carnet": 201834323,
+   "password": "jfIXb85goT1j",
+   "Carpeta_Raiz": "/"
+  },
+  {
+   "nombre": "Natalia Romero",
+   "carnet": 201154386,
+   "password": "xSY0U6!XU6Kv",
+   "Carpeta_Raiz": "/"
+  },
+  {
+   "nombre": "Isabella Weber",
+   "carnet": 201284666,
+   "password": "6OAtts#68ysE",
+   "Carpeta_Raiz": "/"
+  }
+ ]
+}

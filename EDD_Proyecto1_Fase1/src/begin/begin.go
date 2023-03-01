@@ -45,6 +45,7 @@ func main() {
 			fmt.Println("Reportes")
 			readAdminStack()
 			listaDoble.Graficar()
+			listaDoble.JsonFile()
 			pila.Graficar()
 			cola.Graficar()
 
