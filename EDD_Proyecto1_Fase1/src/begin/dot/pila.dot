@@ -3,20 +3,24 @@ rankdir=LR;
 node[shape = record];
 nodonull1[label="null"];
 nodonull2[label="null"];
-nodo0[label="{|Info: # Student rejected: Julian Lewis 
- 28/February/2023  23:47|}"];
-nodo1[label="{|Info: # Student rejected: Samantha Nguyen 
- 28/February/2023  23:47|}"];
-nodo2[label="{|Info: # Student accepted: Landon Dominguez 
- 28/February/2023  23:47|}"];
-nodo3[label="{|Info: # Student accepted: Natalia Romero 
- 28/February/2023  23:47|}"];
-nodo4[label="{|Info: # Student accepted: Isabella Weber 
- 28/February/2023  23:47|}"];
-nodo5[label="{|Info: # Students BulkLoad was done 
- 28/February/2023  23:47|}"];
+nodo0[label="{|Info: # Student accepted: Samantha Nguyen 
+ 28/February/2023  23:54|}"];
+nodo1[label="{|Info: # Student accepted: Landon Dominguez 
+ 28/February/2023  23:54|}"];
+nodo2[label="{|Info: # Student accepted: Natalia Romero 
+ 28/February/2023  23:54|}"];
+nodo3[label="{|Info: # Student accepted: Isabella Weber 
+ 28/February/2023  23:54|}"];
+nodo4[label="{|Info: # Students BulkLoad was done 
+ 28/February/2023  23:54|}"];
 nodonull1->nodo0 [dir=back];
 nodo0-> nodo1;
+nodo1-> nodo2;
+nodo2-> nodo3;
+nodo3-> nodo4;
+nodo4-> nodo5;
+nodo5->nodonull2;
+}odo1;
 nodo1-> nodo2;
 nodo2-> nodo3;
 nodo3-> nodo4;
