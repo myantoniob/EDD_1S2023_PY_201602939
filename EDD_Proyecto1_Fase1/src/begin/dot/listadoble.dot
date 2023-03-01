@@ -1,0 +1,17 @@
+digraph lista{
+rankdir=LR;
+node[shape = record];
+nodonull1[label="null"];
+nodonull2[label="null"];
+nodo0[label="{|Carne: 201834323 Name: Landon Dominguez|}"];
+nodo1[label="{|Carne: 201154386 Name: Natalia Romero|}"];
+nodo2[label="{|Carne: 201284666 Name: Isabella Weber|}"];
+nodonull1->nodo0 [dir=back];
+nodo0->nodo1;
+nodo1->nodo0;
+nodo1->nodo2;
+nodo2->nodo1;
+nodo2->nodo3;
+nodo3->nodo2;
+nodo3->nodonull2;
+}

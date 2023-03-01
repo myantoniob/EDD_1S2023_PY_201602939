@@ -24,9 +24,6 @@ var pila stack.Stack
 
 func main() {
 
-	/*cola := queue.Queue{}
-	listaDoble.TraverseForward()*/
-
 	// Choos log in / or Report or exit
 	exit := true
 	for exit {
@@ -35,11 +32,23 @@ func main() {
 			client := login()
 			if client.username == "admin" && client.password == "admin" {
 				adminDashboard()
+			} else {
+				carnet, _ := strconv.Atoi(client.username)
+				student := listaDoble.Search(carnet, client.password)
+				if student.Carnet != 0 {
+
+					student.StStack.ReadStack()
+				}
 			}
 
 		} else if selected == 2 {
 			fmt.Println("Reportes")
 			readAdminStack()
+			listaDoble.Graficar()
+			pila.Graficar()
+			cola.Graficar()
+
+			//Graficas()
 		} else {
 			fmt.Println("Have a nice day :) ")
 			exit = false
@@ -169,6 +178,9 @@ func pendingStudents() {
 	for exit {
 		fmt.Println("**** Pending #: ", cola.Len(), "****")
 		actual := cola.Front()
+		if actual.Carnet == 0 {
+			exit = false
+		}
 		if actual.Carnet != 0 {
 			fmt.Println("Current student: ", actual.Name, " ", actual.LastName)
 			fmt.Println("1. Accept student")
@@ -185,7 +197,7 @@ func pendingStudents() {
 
 				aux := cola.Dequeue()
 				ct := time.Now()
-				ms := fmt.Sprintf("Student accepted: %s %s %v/%v/%v  %v:%v", aux.Name, aux.LastName, ct.Day(), ct.Month(), ct.Year(), ct.Hour(), ct.Minute())
+				ms := fmt.Sprintf("# Student accepted: %s %s \n %v/%v/%v  %v:%v", aux.Name, aux.LastName, ct.Day(), ct.Month(), ct.Year(), ct.Hour(), ct.Minute())
 				//ms := fmt.Sprintf("Student accepted: ", aux.Name, " ", ct.Day(), "/", ct.Month(), "/", ct.Year(), " ", ct.Hour(), ":", ct.Minute())
 				pila.Push(ms)
 
@@ -197,7 +209,7 @@ func pendingStudents() {
 			case "2":
 				aux := cola.Dequeue()
 				ct := time.Now()
-				ms := fmt.Sprintf("Student rejected: %s %s %v/%v/%v  %v:%v", aux.Name, aux.LastName, ct.Day(), ct.Month(), ct.Year(), ct.Hour(), ct.Minute())
+				ms := fmt.Sprintf("# Student rejected: %s %s \n %v/%v/%v  %v:%v", aux.Name, aux.LastName, ct.Day(), ct.Month(), ct.Year(), ct.Hour(), ct.Minute())
 				//ms := fmt.Sprintf("Student rejected: ", aux.Name, " ", ct.Day(), "/", ct.Month(), "/", ct.Year(), " ", ct.Hour(), ":", ct.Minute())
 				pila.Push(ms)
 
@@ -250,7 +262,7 @@ func newStudents() bool {
 	//To add a node to the queue
 	cola.Enqueue(name, lastName, carnet1, password)
 	ct := time.Now()
-	ms := fmt.Sprintf("New student created: %s %s %v/%v/%v  %v:%v", name, lastName, ct.Day(), ct.Month(), ct.Year(), ct.Hour(), ct.Minute())
+	ms := fmt.Sprintf("# New student created: %s %s \n %v/%v/%v  %v:%v", name, lastName, ct.Day(), ct.Month(), ct.Year(), ct.Hour(), ct.Minute())
 	pila.Push(ms)
 
 	for i := 0; i < 6; i++ {
@@ -290,7 +302,7 @@ func studentsBulkLoad() {
 	}
 	ct := time.Now()
 
-	ms := fmt.Sprintf("Students BulkLoad was done %v/%v/%v  %v:%v", ct.Day(), ct.Month(), ct.Year(), ct.Hour(), ct.Minute())
+	ms := fmt.Sprintf("# Students BulkLoad was done \n %v/%v/%v  %v:%v", ct.Day(), ct.Month(), ct.Year(), ct.Hour(), ct.Minute())
 	//ms := fmt.Sprintf("Students were added ", ct.Day(), "/", ct.Month(), "/", ct.Year(), " ", ct.Hour(), ":", ct.Minute())
 	pila.Push(ms)
 
