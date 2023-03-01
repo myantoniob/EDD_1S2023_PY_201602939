@@ -3,21 +3,27 @@ rankdir=LR;
 node[shape = record];
 nodonull1[label="null"];
 nodonull2[label="null"];
-nodo0[label="{|Info: # Student rejected: Emma Smith 
- 28/February/2023  23:38|}"];
-nodo1[label="{|Info: # Student rejected: Ethan Johnson 
- 28/February/2023  23:38|}"];
-nodo2[label="{|Info: # Student rejected: Camila Pacheco 
- 28/February/2023  23:38|}"];
-nodo3[label="{|Info: # Student accepted: Julian Lewis 
- 28/February/2023  23:38|}"];
-nodo4[label="{|Info: # Student accepted: Samantha Nguyen 
- 28/February/2023  23:38|}"];
-nodo5[label="{|Info: # Student accepted: Landon Dominguez 
- 28/February/2023  23:38|}"];
-nodo6[label="{|Info: # Student accepted: Natalia Romero 
- 28/February/2023  23:38|}"];
-nodo7[label="{|Info: # Student accepted: Isabella Weber 
+nodo0[label="{|Info: # Student rejected: Julian Lewis 
+ 28/February/2023  23:47|}"];
+nodo1[label="{|Info: # Student rejected: Samantha Nguyen 
+ 28/February/2023  23:47|}"];
+nodo2[label="{|Info: # Student accepted: Landon Dominguez 
+ 28/February/2023  23:47|}"];
+nodo3[label="{|Info: # Student accepted: Natalia Romero 
+ 28/February/2023  23:47|}"];
+nodo4[label="{|Info: # Student accepted: Isabella Weber 
+ 28/February/2023  23:47|}"];
+nodo5[label="{|Info: # Students BulkLoad was done 
+ 28/February/2023  23:47|}"];
+nodonull1->nodo0 [dir=back];
+nodo0-> nodo1;
+nodo1-> nodo2;
+nodo2-> nodo3;
+nodo3-> nodo4;
+nodo4-> nodo5;
+nodo5-> nodo6;
+nodo6->nodonull2;
+}Weber 
  28/February/2023  23:38|}"];
 nodo8[label="{|Info: # New student created: mynor ramirez 
  28/February/2023  23:38|}"];

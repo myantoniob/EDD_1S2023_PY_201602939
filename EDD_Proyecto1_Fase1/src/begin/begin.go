@@ -42,7 +42,7 @@ func main() {
 			}
 
 		} else if selected == 2 {
-			fmt.Println("Reportes")
+			fmt.Println("***** Reportes del administrador *****")
 			readAdminStack()
 			listaDoble.Graficar()
 			listaDoble.JsonFile()

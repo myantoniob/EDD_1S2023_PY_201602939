@@ -1,18 +1,6 @@
 {
  "alumnos": [
   {
-   "nombre": "Julian Lewis",
-   "carnet": 201268474,
-   "password": "Z1dxNvL$90Qe",
-   "Carpeta_Raiz": "/"
-  },
-  {
-   "nombre": "Samantha Nguyen",
-   "carnet": 201502132,
-   "password": "FzFVpfi#1GRl",
-   "Carpeta_Raiz": "/"
-  },
-  {
    "nombre": "Landon Dominguez",
    "carnet": 201834323,
    "password": "jfIXb85goT1j",

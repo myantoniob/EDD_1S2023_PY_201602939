@@ -145,7 +145,7 @@ func (d *DoublyList) JsonFile() {
 	for temp != nil {
 		xname := fmt.Sprintf("%s %s", temp.Name, temp.LastName)
 		people.Alumnos = append(people.Alumnos, Item{xname, temp.Carnet, temp.Password, "/"})
-		fmt.Println("Name:", temp.Name, " ", temp.LastName, ", Carnet: ", temp.Carnet)
+		//fmt.Println("Name:", temp.Name, " ", temp.LastName, ", Carnet: ", temp.Carnet)
 		temp = temp.next
 	}
 	fmt.Println()
@@ -158,7 +158,7 @@ func (d *DoublyList) JsonFile() {
 }
 
 func (r *DoublyList) Graficar() {
-	fmt.Println("Impresion")
+	fmt.Println("*Impresion")
 	nombre_archivo_dot := "./dot/listadoble.dot"
 	nombre_imagen := "./images/listadoble.jpg"
 	texto := "digraph lista{\n"
