@@ -57,7 +57,7 @@ func (stack *Stack) ReadStack() {
 }
 
 func (r *Stack) Graficar() {
-	fmt.Println("Impresion")
+	fmt.Println("* Impresion")
 	nombre_archivo_dot := "./dot/pila.dot"
 	nombre_imagen := "./images/pila.jpg"
 	texto := "digraph lista{\n"

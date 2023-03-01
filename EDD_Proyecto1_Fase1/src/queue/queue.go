@@ -69,7 +69,7 @@ func (queue *Queue) Front() Item {
 }
 
 func (r *Queue) Graficar() {
-	fmt.Println("Impresion")
+	fmt.Println("* Impresion")
 	nombre_archivo_dot := "./dot/cola.dot"
 	nombre_imagen := "./images/cola.jpg"
 	texto := "digraph lista{\n"
